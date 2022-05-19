@@ -1,7 +1,10 @@
 export class Game {
   id: string;
-  nome: string;
+  titulo: string;
   descricao: string;
-  tamanho: number;
-  valor: number;
+  imagem: string;
+  ano: number;
+  score: number;
+  trailer: string;
+  gameplay: string;
 }

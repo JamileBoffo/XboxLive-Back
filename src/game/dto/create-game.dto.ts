@@ -6,28 +6,43 @@ export class CreateGameDto {
     description: "O nome do jogo",
     example: "The Sims 4"
   })
-  nome: string;
+  titulo: string;
   @ApiProperty({
     description: "Descrição do jogo",
     example: "É um jogo de controlar pessoas"
   })
   descricao: string;
+  @ApiProperty({
+    description: "Link da Imagem/Poster do jogo",
+    example: "https://s2.glbimg.com/63RyfB6MLfUIxkTtegPZZ0FOx8g=/e.glbimg.com/og/ed/f/original/2021/03/20/felicidade.jpg"
+  })
+  imagem: string;
   @IsPositive({
     message: "Número deve ser positivo"
   })
   @IsNumber()
   @ApiProperty({
-    description: "Tamanho do jogo(somente numero)",
-    example: "40GB"
+    description: "Ano de lançamento do jogo",
+    example: "2011"
   })
-  tamanho: number;
+  ano: number;
   @IsPositive({
     message: "Número deve ser positivo"
   })
   @IsNumber()
   @ApiProperty({
-    description: "Valor do jogo",
-    example: "R$79"
+    description: "Avaliação do jogo(0 a 5)",
+    example: "3"
   })
-  valor: number;
+  score: number;
+  @ApiProperty({
+    description: "Link do trailer do jogo(Youtube)",
+    example: "<iframe width=560 height=315 src=https://www.youtube.com/embed/liuFhVXAlZw title=YouTube video player frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>"
+  })
+  trailer: string;
+  @ApiProperty({
+    description: "Link da Gameplay do jogo(Youtube)",
+    example: "<iframe width=560 height=315 src=https://www.youtube.com/embed/liuFhVXAlZw title=YouTube video player frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>"
+  })
+  gameplay: string;
 }
