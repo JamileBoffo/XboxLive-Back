@@ -1,7 +1,7 @@
 import { IsNumber, IsPositive } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
-export class CreateStoreDto {
+export class CreateGameDto {
   @ApiProperty({
     description: "O nome do jogo",
     example: "The Sims 4"
@@ -31,4 +31,3 @@ export class CreateStoreDto {
   })
   valor: number;
 }
- //https://github.com/typestack/class-validator
