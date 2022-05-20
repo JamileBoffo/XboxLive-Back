@@ -1,27 +1,27 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { GendersService } from './genders.service';
 import { CreateGendersDto } from './dto/create-genders.dto';
 import { Gender } from './entities/genders.entity';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Genders')
+@ApiTags('Gender')
 @Controller('genders')
 export class GendersController {
-  constructor(private genderService: GendersService) {}
+  constructor(private readonly genderService: GendersService) {}
 
   @Get()
-  findAll(): Gender[] {
+  findAll(): Promise<Gender[]> {
     return this.genderService.findAll();
   }
 
-  /*@Get()
-  findById(): Gender[]{
-    return this.genderService.findById(id);
-  }*/
+  @Get(':id')
+  findOne(@Param('id') id: string):Promise<Gender>{
+    return this.genderService.findOne(id);
+  }
 
   @Post()
-  create(@Body() createGenderDto: CreateGendersDto): Gender {
-    return this.genderService.create(createGenderDto);
+  create(@Body() dto: CreateGendersDto): Promise<Gender> {
+    return this.genderService.create(dto);
   }
 
   /*@Put()

@@ -1,4 +1,4 @@
 export class Gender {
-    id: number;
+    id?: string;
     nome: string;
 }
