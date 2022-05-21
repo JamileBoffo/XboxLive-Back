@@ -12,7 +12,7 @@ export class GendersService {
     return this.prisma.gender.findMany();
   }
 
-  async findOne(id: string): Promise<Gender> {
+  async findById(id: string): Promise<Gender> {
     const record= await this.prisma.gender.findUnique({ where: { id } });
 
     if(!record) {
@@ -22,12 +22,17 @@ export class GendersService {
     return record;
   }
 
+  async findOne(id: string): Promise<Gender> {
+    return this.findById(id)
+  }
+
   create(dto: CreateGendersDto): Promise<Gender> {
     const data: Gender = { ...dto };
     return this.prisma.gender.create({ data });
   }
 
-  update(id: string, dto: UpdateGenderDto): Promise<Gender> {
+  async update(id: string, dto: UpdateGenderDto): Promise<Gender> {
+    await this.findById(id)
     const data: Partial<Gender> = { ...dto };
     return this.prisma.gender.update({ where: { id }, data });
   }
