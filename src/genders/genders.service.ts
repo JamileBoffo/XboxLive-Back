@@ -6,6 +6,7 @@ import { UpdateGenderDto } from './dto/update-genders.dto';
 
 @Injectable()
 export class GendersService {
+  genders: Gender[] = [];
   constructor(private readonly prisma: PrismaService) {}
 
   findAll(): Promise<Gender[]> {
