@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
 import { GendersService } from './genders.service';
 import { CreateGendersDto } from './dto/create-genders.dto';
 import { Gender } from './entities/genders.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { UpdateGenderDto } from './dto/update-genders.dto';
 
 @ApiTags('Gender')
 @Controller('genders')
@@ -15,6 +16,9 @@ export class GendersController {
   }
 
   @Get(':id')
+  @ApiOperation({
+    summary: "Listar todos os jogos da loja!"
+  })
   findOne(@Param('id') id: string):Promise<Gender>{
     return this.genderService.findOne(id);
   }
@@ -24,13 +28,20 @@ export class GendersController {
     return this.genderService.create(dto);
   }
 
-  /*@Put()
-  update(updateGenderDto: UpdateGenderDto): Gender {
-    return this.genderService.update(updateGenderDto)
-  }*/
+  @Patch(':id')
+  @ApiOperation({
+    summary: "Atualizar um jogo da loja pelo ID"
+  })
+  update(@Param('id') id: string, @Body() dto: UpdateGenderDto): Promise<Gender> {
+    return this.genderService.update(id, dto)
+  }
 
-  /*@Delete()
-  delete(deleteGenderDto: DeleteGenderDto): Gender {
-    return this.genderService.delete(deleteGenderDto)
-  }*/
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({
+    summary: "Deletar um jogo da loja pelo ID"
+  })
+  delete(@Param('id') id: string) {
+    return this.genderService.delete(id)
+  }
 }
