@@ -11,26 +11,32 @@ export class GendersController {
   constructor(private readonly genderService: GendersService) {}
 
   @Get()
+  @ApiOperation({
+    summary: "Listar todos os gêneros de jogos!"
+  })
   findAll(): Promise<Gender[]> {
     return this.genderService.findAll();
   }
 
   @Get(':id')
   @ApiOperation({
-    summary: "Listar todos os jogos da loja!"
+    summary: "Buscar um gênero de jogos por ID!"
   })
   findOne(@Param('id') id: string):Promise<Gender>{
     return this.genderService.findOne(id);
   }
 
   @Post()
+  @ApiOperation({
+    summary: "Criar um gênero de jogos!"
+  })
   create(@Body() dto: CreateGendersDto): Promise<Gender> {
     return this.genderService.create(dto);
   }
 
   @Patch(':id')
   @ApiOperation({
-    summary: "Atualizar um jogo da loja pelo ID"
+    summary: "Atualizar um gênero de jogos pelo ID"
   })
   update(@Param('id') id: string, @Body() dto: UpdateGenderDto): Promise<Gender> {
     return this.genderService.update(id, dto)
@@ -39,7 +45,7 @@ export class GendersController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
-    summary: "Deletar um jogo da loja pelo ID"
+    summary: "Deletar um gênero de jogos pelo ID"
   })
   delete(@Param('id') id: string) {
     return this.genderService.delete(id)

@@ -1,36 +1,54 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { GameService } from './game.service';
 import { CreateGameDto } from './dto/create-game.dto';
+import { UpdateGameDto } from './dto/update-game.dto';
 import { Game } from './entities/game.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
 @ApiTags('Game')
 @Controller('game')
 export class GameController {
-  constructor(private gameService: GameService) {}
+  constructor(private readonly gameService: GameService) {}
 
   @Get()
-  findAll(): Game[]{
+  @ApiOperation({
+    summary: "Listar todos os jogos favoritados!"
+  })
+  findAll(): Promise<Game[]>{
     return this.gameService.findAll();
   }
 
-  /*@Get()
-  findById(): Game[]{
-    return this.gameService.findById(id);
-  }*/
-
-  @Post()
-  create(createGameDto: CreateGameDto): Game {
-    return this.gameService.create(createGameDto)
+  @Get(':id')
+  @ApiOperation({
+    summary: "Buscar um jogo favoritado por ID!"
+  })
+  findOne(@Param('id') id: string): Promise<Game>{
+    return this.gameService.findOne(id);
   }
 
-  /*@Put()
-  update(updateGameDto: UpdateGameDto): Game {
-    return this.gameService.update(updateGameDto)
-  }*/
+  @Post()
+  @ApiOperation({
+    summary: "Adicionar um jogo a lista de favoritos!"
+  })
+  create(@Body() dto: CreateGameDto): Promise<Game> {
+    return this.gameService.create(dto)
+  }
 
-  /*@Delete()
-  delete(deleteGameDto: DeleteGameDto): Game {
-    return this.gameService.delete(deleteGameDto)
-  }*/
+  @Patch(':id')
+  @ApiOperation({
+    summary: "Atualizar um jogo favoritado pelo ID"
+  })
+  update(@Param('id') id: string, @Body() dto: UpdateGameDto): Promise<Game> {
+    return this.gameService.update(id, dto);
+  }
+
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({
+    summary: "Deletar um jogo da lista de favoritos pelo ID"
+  })
+  delete(@Param('id') id: string) {
+    return this.gameService.delete(id)
+  }
 }
