@@ -7,4 +7,6 @@ export class Game {
   score: number;
   trailer: string;
   gameplay: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
