@@ -27,12 +27,11 @@ export class CreateUserDto {
     example: "senha123"
   })
   confirmsenha: string;
-  @IsNumber()
   @ApiProperty({
     description: "CPF do usuario",
-    example: 11111111111
+    example: "11111111111"
   })
-  cpf: number;
+  cpf: string;
   @IsBoolean()
   @ApiProperty({
     description: "Usuario é Administrador?",

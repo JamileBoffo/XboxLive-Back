@@ -1,7 +1,7 @@
 import {
   BadRequestException,
   Injectable,
-  NotFoundException,
+  NotFoundException
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -52,10 +52,16 @@ export class UserService {
     if (dto.senha != dto.confirmsenha) {
       throw new BadRequestException('As senhas não conferem!!');
     }
+
     delete dto.confirmsenha;
-    const data: User = { ...dto, senha: await bcrypt.hash(dto.senha, 10) };
+
+    const data: User = {
+      ...dto,
+      senha: await bcrypt.hash(dto.senha, 10) };
     return this.prisma.user
-      .create({ data, select: this.userSelect })
+      .create({
+        data,
+        select: this.userSelect })
       .catch(handleError);
   }
 
@@ -79,7 +85,8 @@ export class UserService {
       where: { id },
       data,
       select: this.userSelect,
-    });
+    })
+    .catch(handleError);
   }
 
   async delete(id: string) {
