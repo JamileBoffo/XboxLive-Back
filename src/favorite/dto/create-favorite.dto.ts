@@ -13,6 +13,6 @@ export class CreateFavoriteDto {
   @ApiProperty({
     description: "Lista com os IDs dos jogos"
   })
-  gameId: string;
+  games: string[];
 
 }
