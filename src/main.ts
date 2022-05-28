@@ -14,7 +14,6 @@ async function bootstrap() {
     .setDescription('Aplicação para gestão da loja de jogos')
     .setVersion('1.0.0')
     .addTag('Status')
-    .addTag('Store')
     .addTag('Game')
     .addTag('Gender')
     .addTag('User')
