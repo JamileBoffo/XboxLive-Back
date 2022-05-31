@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Param} from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { CreateFavoriteDto } from './dto/create-favorite.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { FavoriteService } from './favorite.service';
+import { LoggedUser } from 'src/auth/loggeduser.decorator';
+import { User } from 'src/user/entities/user.entity';
 
 @ApiTags("Favorite")
 @Controller('favorite')
@@ -29,7 +30,7 @@ export class FavoriteController {
   @ApiOperation({
     summary: "Criar um novo favorito!"
   })
-  create(@Body() dto: CreateFavoriteDto) {
-    return this.favoriteService.create(dto);
+  create(@LoggedUser() user: User, @Body() dto: CreateFavoriteDto) {
+    return this.favoriteService.create(user.id, dto);
   }
 }

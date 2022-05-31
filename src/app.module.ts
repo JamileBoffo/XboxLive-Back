@@ -7,10 +7,11 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { FavoriteModule } from './favorite/favorite.module';
 import { ProfileModule } from './profile/profile.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
-  imports: [GameModule, GendersModule, PrismaModule, UserModule, FavoriteModule, ProfileModule],
+  imports: [GameModule, GendersModule, PrismaModule, UserModule, FavoriteModule, ProfileModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

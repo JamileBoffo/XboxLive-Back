@@ -49,11 +49,11 @@ export class FavoriteService {
       } })
   }
 
-  create(dto: CreateFavoriteDto) {
+  create(profileId: string, dto: CreateFavoriteDto) {
     const data: Prisma.FavoriteCreateInput = {
       Profile: {
         connect: {
-          id: dto.profileId,
+          id: profileId,
         }
       },
       games: {

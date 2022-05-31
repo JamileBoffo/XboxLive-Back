@@ -8,9 +8,9 @@ datasource db {
 }
 
 model Gender {
-  id   String @id @default(uuid())
-  nome String @unique
-  game Game[]
+  id        String   @id @default(uuid())
+  nome      String   @unique
+  game      Game[]
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -18,20 +18,19 @@ model Gender {
 }
 
 model Game {
-  id         String    @id @default(uuid())
-  titulo     String    @unique
-  descricao  String
-  imagem     String
-  ano        Int
-  score      Int
-  trailer    String
-  gameplay   String
-  gender     Gender[]
-  profile    Profile[]
-  Favorite   Favorite  @relation(fields: [favoriteId], references: [id])
-  favoriteId String
-  createdAt  DateTime  @default(now()) @map("created_at")
-  updatedAt  DateTime  @updatedAt @map("updated_at")
+  id        String     @id @default(uuid())
+  titulo    String     @unique
+  descricao String
+  imagem    String
+  ano       Int
+  score     Int
+  trailer   String
+  gameplay  String
+  gender    Gender[]
+  profile   Profile[]
+  favorite  Favorite[]
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
 
   @@map("game")
 }
@@ -51,15 +50,15 @@ model Profile {
 }
 
 model User {
-  id      String    @id @default(uuid())
-  nome    String
-  email   String    @unique
-  senha   String
-  cpf     String    @unique
-  isAdmin Boolean   @map("is_admin")
-  profile Profile[]
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id        String    @id @default(uuid())
+  nome      String
+  email     String    @unique
+  senha     String
+  cpf       String    @unique
+  isAdmin   Boolean   @map("is_admin")
+  profile   Profile[]
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
 
   @@map("user")
 }

@@ -1,11 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { GendersService } from './genders.service';
 import { CreateGendersDto } from './dto/create-genders.dto';
 import { Gender } from './entities/genders.entity';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { UpdateGenderDto } from './dto/update-genders.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Gender')
+@UseGuards(AuthGuard())
+@ApiBearerAuth()
 @Controller('genders')
 export class GendersController {
   constructor(private readonly genderService: GendersService) {}
