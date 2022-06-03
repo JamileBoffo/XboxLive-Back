@@ -39,7 +39,7 @@ model Profile {
   id        String     @id @default(uuid())
   titulo    String
   imagemURL String     @map("imagem_url")
-  User      User       @relation(fields: [userId], references: [id])
+  user      User       @relation(fields: [userId], references: [id])
   userId    String     @map("user_id")
   game      Game[]
   Favorite  Favorite[]
@@ -65,7 +65,7 @@ model User {
 
 model Favorite {
   id        String   @id @default(uuid())
-  Profile   Profile  @relation(fields: [profileId], references: [id])
+  profile   Profile  @relation(fields: [profileId], references: [id])
   profileId String   @map("profile_id")
   games     Game[]
   createdAt DateTime @default(now()) @map("created_at")
