@@ -12,7 +12,7 @@ export class FavoriteService {
     return this.prisma.favorite.findMany({
       select: {
         id: true,
-        Profile:{
+        profile:{
           select: {
             titulo: true
           }
@@ -31,7 +31,7 @@ export class FavoriteService {
     return this.prisma.favorite.findUnique({
       where: { id },
       include: {
-        Profile: {
+        profile: {
           select: {
             titulo: true
           }
@@ -51,7 +51,7 @@ export class FavoriteService {
 
   create(profileId: string, dto: CreateFavoriteDto) {
     const data: Prisma.FavoriteCreateInput = {
-      Profile: {
+      profile: {
         connect: {
           id: profileId,
         }
@@ -65,7 +65,7 @@ export class FavoriteService {
 
     return this.prisma.favorite.create({ data, select: {
       id: true,
-      Profile: {
+      profile: {
         select: {
           titulo: true,
         }
