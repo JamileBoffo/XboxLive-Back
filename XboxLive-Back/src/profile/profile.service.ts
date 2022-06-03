@@ -39,7 +39,7 @@ export class ProfileService {
   async update(id: string, dto: UpdateProfileDto): Promise<Profile> {
     await this.findById(id);
     const data: Partial<Profile> = { ...dto };
-    return this.prisma.profile.update({ where: {id}, data})
+    return this.prisma.profile.update({ where: {id}, data});
   }
 
   async delete(id: string) {
