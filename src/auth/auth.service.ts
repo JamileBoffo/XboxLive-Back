@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private readonly prisma: PrismaService, private readonly jwtService: JwtService) {}
 
   async login(loginDto: LoginDto): Promise<LoginResponseDto> {
-    const {email,password } = loginDto;
+    const {email, senha} = loginDto;
 
     const user = await this.prisma.user.findUnique({ where: { email }})
 
@@ -18,7 +18,7 @@ export class AuthService {
       throw new UnauthorizedException('Usuario ou senha inválidos!')
     }
 
-    const isHashValid = await bcrypt.compare(password, user.senha);
+    const isHashValid = await bcrypt.compare(senha, user.senha);
 
     if(!isHashValid) {
       throw new UnauthorizedException('Usuario ou senha inválidos!')

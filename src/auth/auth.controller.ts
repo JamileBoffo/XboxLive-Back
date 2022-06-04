@@ -8,7 +8,7 @@ import { User } from 'src/user/entities/user.entity';
 import { LoggedUser } from './loggeduser.decorator';
 
 @Controller('auth')
-@ApiTags('auth')
+@ApiTags('Auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

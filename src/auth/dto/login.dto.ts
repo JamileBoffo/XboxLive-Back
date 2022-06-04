@@ -16,5 +16,5 @@ export class LoginDto {
     description: 'Senha do usuario',
     example: 'pass123'
   })
-  password: string;
+  senha: string;
 }
