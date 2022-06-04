@@ -38,7 +38,7 @@ export class UserService {
     });
 
     if (!record) {
-      throw new NotFoundException(`Registro com o ${id}`);
+      throw new NotFoundException(`Registro com o ${id} não encontrado`);
     }
 
     return record;
@@ -68,6 +68,10 @@ export class UserService {
   async update(id: string, dto: UpdateUserDto): Promise<User> {
     await this.findById(id);
 
+    if(dto.cpf) {
+      throw new BadRequestException('Não é possivel alterar o CPF')
+    }
+
     if (dto.senha) {
       if (dto.senha != dto.confirmsenha) {
         throw new BadRequestException('As senhas não conferem!!');
@@ -90,6 +94,7 @@ export class UserService {
   }
 
   async delete(id: string) {
+    await this.findById(id)
     await this.prisma.user.delete({ where: { id } });
   }
 }

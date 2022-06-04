@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch } from '@nestjs/common';
 import { CreateFavoriteDto } from './dto/create-favorite.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { FavoriteService } from './favorite.service';
