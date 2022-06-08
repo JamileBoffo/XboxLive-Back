@@ -30,7 +30,7 @@ export class FavoriteController {
   @ApiOperation({
     summary: "Criar um novo favorito!"
   })
-  create(@LoggedUser() user: User, @Body() dto: CreateFavoriteDto) {
-    return this.favoriteService.create(user.id, dto);
+  create(@Body() dto: CreateFavoriteDto) {
+    return this.favoriteService.create( dto );
   }
 }
