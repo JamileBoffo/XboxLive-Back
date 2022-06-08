@@ -38,7 +38,7 @@ model Game {
 model Profile {
   id        String     @id @default(uuid())
   titulo    String
-  imagemURL String     @map("imagem_url")
+  imagemURL String     @map("imagem_url") @default("https://www.informatique-mania.com/wp-content/uploads/2021/02/guest.png")
   user      User       @relation(fields: [userId], references: [id])
   userId    String     @map("user_id")
   game      Game[]

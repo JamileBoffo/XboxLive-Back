@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsUUID } from "class-validator";
-import { Profile } from "src/profile/entities/profile.entity";
+
 
 
 export class CreateFavoriteDto {
@@ -8,7 +8,7 @@ export class CreateFavoriteDto {
   @ApiProperty({
     description: "Perfil"
   })
-  profile: Profile[];
+  profileId: string;
 
   @IsUUID(undefined, { each: true })
   @ApiProperty({
