@@ -26,7 +26,8 @@ model Game {
   score     Int
   trailer   String
   gameplay  String
-  gender    Gender[]
+  gender    Gender     @relation(fields: [genderId], references: [id])
+  genderId  String     @map("gender_id")
   profile   Profile[]
   favorite  Favorite[]
   createdAt DateTime   @default(now()) @map("created_at")
@@ -38,7 +39,7 @@ model Game {
 model Profile {
   id        String     @id @default(uuid())
   titulo    String
-  imagemURL String     @map("imagem_url") @default("https://www.informatique-mania.com/wp-content/uploads/2021/02/guest.png")
+  imagemURL String     @default("https://www.informatique-mania.com/wp-content/uploads/2021/02/guest.png") @map("imagem_url")
   user      User       @relation(fields: [userId], references: [id])
   userId    String     @map("user_id")
   game      Game[]

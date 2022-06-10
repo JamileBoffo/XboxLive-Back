@@ -1,3 +1,5 @@
+import { Gender } from "src/genders/entities/genders.entity";
+
 export class Game {
   id?: string;
   titulo: string;
@@ -9,4 +11,5 @@ export class Game {
   gameplay: string;
   createdAt?: Date;
   updatedAt?: Date;
+  gender?: Gender;
 }

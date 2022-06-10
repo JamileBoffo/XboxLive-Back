@@ -1,4 +1,4 @@
-import { IsNumber, IsPositive } from "class-validator";
+import { IsNumber, IsPositive, IsUrl, IsUUID } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateGameDto {
@@ -45,4 +45,9 @@ export class CreateGameDto {
     example: "<iframe width=560 height=315 src=https://www.youtube.com/embed/liuFhVXAlZw title=YouTube video player frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>"
   })
   gameplay: string;
+  @IsUUID(undefined, { each: true })
+  @ApiProperty({
+    description: "ID do genero"
+  })
+  genderId: string;
 }

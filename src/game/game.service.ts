@@ -27,8 +27,12 @@ export class GameService {
     return this.findById(id)
   }
 
-  create(dto: CreateGameDto): Promise<Game> {
-    const data: Game = { ...dto };
+  create(genderId: string, dto: CreateGameDto): Promise<Game> {
+    const data: Game = { ...dto, gender: {
+      connect: {
+        id: genderId,
+      }
+    } };
     return this.prisma.game.create({ data }).catch(handleError);
   }
 
