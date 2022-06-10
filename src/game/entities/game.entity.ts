@@ -11,5 +11,5 @@ export class Game {
   gameplay: string;
   createdAt?: Date;
   updatedAt?: Date;
-  gender?: Gender;
+  gender?: Gender[];
 }

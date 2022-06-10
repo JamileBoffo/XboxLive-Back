@@ -5,6 +5,8 @@ import { UpdateGameDto } from './dto/update-game.dto';
 import { Game } from './entities/game.entity';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { LoggedUser } from 'src/auth/loggeduser.decorator';
+import { Gender } from 'src/genders/entities/genders.entity';
 
 @ApiTags('Game')
 @UseGuards(AuthGuard())
@@ -15,7 +17,7 @@ export class GameController {
 
   @Get()
   @ApiOperation({
-    summary: "Listar todos os jogos favoritados!"
+    summary: "Listar todos os jogos!"
   })
   findAll(): Promise<Game[]>{
     return this.gameService.findAll();
@@ -23,7 +25,7 @@ export class GameController {
 
   @Get(':id')
   @ApiOperation({
-    summary: "Buscar um jogo favoritado por ID!"
+    summary: "Buscar um jogo por ID!"
   })
   findOne(@Param('id') id: string): Promise<Game>{
     return this.gameService.findOne(id);
@@ -31,15 +33,15 @@ export class GameController {
 
   @Post()
   @ApiOperation({
-    summary: "Adicionar um jogo a lista de favoritos!"
+    summary: "Adicionar um jogo"
   })
-  create(@Body() dto: CreateGameDto): Promise<Game> {
+  create(@Body() dto: CreateGameDto) {
     return this.gameService.create(dto)
   }
 
   @Patch(':id')
   @ApiOperation({
-    summary: "Atualizar um jogo favoritado pelo ID"
+    summary: "Atualizar um jogo  pelo ID"
   })
   update(@Param('id') id: string, @Body() dto: UpdateGameDto): Promise<Game> {
     return this.gameService.update(id, dto);
@@ -49,7 +51,7 @@ export class GameController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
-    summary: "Deletar um jogo da lista de favoritos pelo ID"
+    summary: "Deletar um jogo pelo ID"
   })
   delete(@Param('id') id: string) {
     return this.gameService.delete(id)

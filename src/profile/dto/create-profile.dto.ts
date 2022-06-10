@@ -3,6 +3,10 @@ import { IsUrl } from "class-validator";
 
 export class CreateProfileDto {
   @ApiProperty({
+    description: "Id do User"
+  })
+  userId: string;
+  @ApiProperty({
     description: "Nome do perfil",
     example: "Maria"
   })

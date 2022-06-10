@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
+import { handleError } from "src/utils/handle-error.utils";
 import { CreateProfileDto } from "./dto/create-profile.dto";
 import { UpdateProfileDto } from "./dto/update-profile.dto";
 import { Profile } from "./entities/profile.entity";
@@ -27,12 +28,12 @@ export class ProfileService {
     return this.findById(id);
   }
 
-  create(userId: string, dto: CreateProfileDto): Promise<Profile> {
+  create(dto: CreateProfileDto) {
     return this.prisma.profile.create({
       data: {
         titulo: dto.titulo,
         imagemURL: dto.imagemURL,
-        user: { connect: { id: userId } }
+        user: { connect: { id: dto.userId } }
       }
     });
   }
@@ -40,7 +41,7 @@ export class ProfileService {
   async update(id: string, dto: UpdateProfileDto): Promise<Profile> {
     await this.findById(id);
     const data: Partial<Profile> = { ...dto };
-    return this.prisma.profile.update({ where: { id }, data });
+    return this.prisma.profile.update({ where: { id }, data }).catch(handleError);
   }
 
   async delete(id: string) {

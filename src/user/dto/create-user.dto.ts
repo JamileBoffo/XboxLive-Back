@@ -17,9 +17,6 @@ export class CreateUserDto {
   email: string;
   @IsString()
   @MinLength(6)
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-    message: 'Senha muito fraca',
-  })
   @ApiProperty({
     description: "senha do usuario",
     example: "senha123"
