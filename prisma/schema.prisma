@@ -26,8 +26,7 @@ model Game {
   score     Int
   trailer   String
   gameplay  String
-  gender    Gender     @relation(fields: [genderId], references: [id])
-  genderId  String     @map("gender_id")
+  gender    Gender[]
   profile   Profile[]
   favorite  Favorite[]
   createdAt DateTime   @default(now()) @map("created_at")

@@ -9,8 +9,6 @@ import { LoggedUser } from 'src/auth/loggeduser.decorator';
 import { Gender } from 'src/genders/entities/genders.entity';
 
 @ApiTags('Game')
-@UseGuards(AuthGuard())
-@ApiBearerAuth()
 @Controller('game')
 export class GameController {
   constructor(private readonly gameService: GameService) {}
@@ -24,6 +22,8 @@ export class GameController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @ApiOperation({
     summary: "Buscar um jogo por ID!"
   })
@@ -32,6 +32,8 @@ export class GameController {
   }
 
   @Post()
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @ApiOperation({
     summary: "Adicionar um jogo"
   })
@@ -40,6 +42,8 @@ export class GameController {
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @ApiOperation({
     summary: "Atualizar um jogo  pelo ID"
   })
@@ -49,6 +53,8 @@ export class GameController {
 
 
   @Delete(':id')
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
     summary: "Deletar um jogo pelo ID"

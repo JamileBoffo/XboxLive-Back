@@ -7,8 +7,6 @@ import { UpdateGenderDto } from './dto/update-genders.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Gender')
-@UseGuards(AuthGuard())
-@ApiBearerAuth()
 @Controller('genders')
 export class GendersController {
   constructor(private readonly genderService: GendersService) {}
@@ -22,6 +20,8 @@ export class GendersController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @ApiOperation({
     summary: "Buscar um gênero de jogos por ID!"
   })
@@ -30,6 +30,8 @@ export class GendersController {
   }
 
   @Post()
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @ApiOperation({
     summary: "Criar um gênero de jogos!"
   })
@@ -38,6 +40,8 @@ export class GendersController {
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @ApiOperation({
     summary: "Atualizar um gênero de jogos pelo ID"
   })
@@ -46,6 +50,8 @@ export class GendersController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
     summary: "Deletar um gênero de jogos pelo ID"

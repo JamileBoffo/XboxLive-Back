@@ -39,7 +39,7 @@ export class GameService {
       gameplay: dto.gameplay,
       gender: {
         connect: {
-          nome: dto.genderId,
+          id: dto.genderId,
         },
       },
     };
@@ -59,7 +59,7 @@ export class GameService {
       gameplay: dto.gameplay,
       gender: {
         connect: {
-          nome: dto.genderId,
+          id: dto.genderId,
         }
       }
     };
